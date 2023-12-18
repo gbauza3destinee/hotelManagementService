@@ -1,0 +1,68 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+Guest --* Receptionist
+HouseKeeper --* Task
+Guest --* Room
+Guest ---* Receptionist
+Server --* Order
+Receptionist --* Order
+
+interface Hotel {
+    - long id
+    + generateHotelId()
+}
+
+class HouseKeeper{
+    + Task task
+
+    + performTask()
+    + createTask()
+    + deleteTask()
+}
+
+class Task{
+    + String task
+    + Task()
+}
+
+class Order{
+    + String order
+
+}
+
+class Receptionist{
+    + Order order
+    + answerCall()
+    + getBookingStatus()
+    + viewGuestOrder()
+    + checkAvailableRooms() : List <Room> availableRooms;
+    + setGuestRoom() : Enum
+    + getGuestRoom() : Enum
+}
+
+class Server{
+    + Order order
+    + completeGuestOrder()
+}
+
+class Guest{
+    - Receptionist receptionist
+    - Room room
+    - GuestOrder guestOrder;
+    + cancelReservation()
+    + getBookingStatus()
+    + getRoomType()
+    + addService()
+    + viewService()
+}
+enum Room{
+STANDARD
+DELUXE
+FAMILYSUITE
+BUSINESSSUITE
+}
+
+
+
+@enduml
